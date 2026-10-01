@@ -4,14 +4,14 @@
 
 ## Prototype link
 
-_The public share URL from your build tool. No share URL? A screenshot of the working flow is fine, the prompt is what is assessed._
+User sentiment dashboard 
 https://lovable.dev/preview/VlTGs8umES7rZRBcJTu9m0KlANk63ZCH
 _____
 
 ## What it demonstrates
 
 _The one flow this prototype proves._
-The agent PM provides a quick weekly view of how users feel about the product since launch, what is improving or getting worse, and where the team should focus its attention.
+The agent PM provides a quick weekly view of how users feel about the product since launch, what is improving or getting worse, and where the team should focus its attention. This solves trying to get insights from scattered signals across multiple platforms.
 _____
 
 ## Debrief
