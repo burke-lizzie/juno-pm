@@ -4,14 +4,19 @@
 
 ## Prototype link
 
-User sentiment dashboard 
-https://lovable.dev/preview/VlTGs8umES7rZRBcJTu9m0KlANk63ZCH
+[User sentiment dashboard](https://lovable.dev/preview/VlTGs8umES7rZRBcJTu9m0KlANk63ZCH)
 _____
 
 ## What it demonstrates
 
-_The one flow this prototype proves._
-The agent PM provides a quick weekly view of how users feel about the product since launch, what is improving or getting worse, and where the team should focus its attention. This solves trying to get insights from scattered signals across multiple platforms.
+**Who’s using it**
+Product Managers and product leaders responsible for the Launch Management experience who want to understand sentiment across reviewers and engineers, with the ability to drill into specific reviewer types and engineering orgs.
+
+**Where you’d see it**
+A weekly internal sentiment dashboard that synthesizes feedback from Slack, Jira comments, user interviews, and surveys. It shows sentiment trends over time around our three priorities: faster reviews, faster submissions, and earlier feedback on risk, with key themes and representative quotes.
+
+**What it takes off your plate**
+Manually reading and synthesizing feedback across multiple channels to figure out what users are experiencing. It automatically surfaces how sentiment is changing, differences by persona, what’s going well, and where attention may be needed across tooling, process, or change management/enablement.
 _____
 
 ## Debrief
