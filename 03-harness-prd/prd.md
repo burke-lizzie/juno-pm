@@ -10,12 +10,12 @@ RocketShip PMs need this handled: Juno displays a weekly view of how users feel 
 
 | Surface | Specification |
 |---|---|
-| 01 Context | ### Required Sources and Exclusions Juno has read-only access to approved sources: - Product strategy one-pager and roadmap - Designated… |
-| 02 Tools | - **READ (auto):** Retrieve approved Slack messages, Jira records, Asana feature requests, interview transcripts, surveys, strategy… |
-| 03 Loop | - **Schedule:** One run every Thursday at 2 PM Pacific. - **Maximum processing stages:** Five per run:   1. Retrieve approved source data. |
-| 04 Memory | Juno retains product-level historical sentiment snapshots dating back to launch (May 2026), including: - Weekly sentiment themes -… |
-| 05 Permissions | read auto · draft auto · write confirm · send confirm |
-| 06 Verification | Before presenting results, Juno verifies: - **Source traceability:** 100% of published insights and quotes link to their original sources. |
+| **01 · Context** | Read-only access to approved Slack, Jira, Asana, interviews, surveys, and product strategy. Weekly refresh with source traceability. |
+| **02 · Tools** | Read and analyze approved sources, classify sentiment, cross-reference completed features, and draft insights. Dashboard writes and Slack publication require approval. |
+| **03 · Loop** | Weekly Thursday run at 2 PM Pacific. Five processing stages, 15-minute timeout, defined stop conditions, and human escalation. |
+| **04 · Memory** | Retain 12 months of sentiment snapshots, historical trends, source references, and human corrections. |
+| **05 · Permissions** | Read: Auto · Draft: Auto · Write: Confirm · Send: Confirm |
+| **06 · Verification** | Verify evidence, sentiment trends, persona attribution, and current feature status before human approval and publication. |
 
 ## 01 Context · Data Requirements
 
