@@ -10,120 +10,153 @@ RocketShip PMs need this handled: Juno displays a weekly view of how users feel 
 
 | Surface | Specification |
 |---|---|
-| 01 Context | Juno has read-only access to the following approved sources: - Raw signals - Product strategy one-pager, which establish our three… |
-| 02 Tools | READ (auto): Retrieve approved Slack messages, Jira records, interview transcripts, surveys, strategy documents, and historical sentiment… |
-| 03 Loop | One scheduled run every Thursday at 2 PM Pacific. Maximum five processing stages per run: Retrieve approved source data Classify and group… |
-| 04 Memory | Juno retains product-level historical sentiment snapshots from launch (May 2026), including weekly themes, sentiment trends by persona and… |
+| 01 Context | ### Required Sources and Exclusions Juno has read-only access to approved sources: - Product strategy one-pager and roadmap - Designated… |
+| 02 Tools | - **READ (auto):** Retrieve approved Slack messages, Jira records, Asana feature requests, interview transcripts, surveys, strategy… |
+| 03 Loop | - **Schedule:** One run every Thursday at 2 PM Pacific. - **Maximum processing stages:** Five per run:   1. Retrieve approved source data. |
+| 04 Memory | Juno retains product-level historical sentiment snapshots dating back to launch (May 2026), including: - Weekly sentiment themes -… |
 | 05 Permissions | read auto · draft auto · write confirm · send confirm |
-| 06 Verification | Before updating the dashboard or presenting the Slack draft, Juno verifies: 100% of published insights and quotes have accessible source… |
+| 06 Verification | Before presenting results, Juno verifies: - **Source traceability:** 100% of published insights and quotes link to their original sources. |
 
 ## 01 Context · Data Requirements
 
 **Required sources, and exclusions**
 
-Juno has read-only access to the following approved sources:
-- Raw signals
-- Product strategy one-pager, which establish our three priorities
-- Product roadmap
-- Slack messages in organizational review channels
-- Jira ticket comments
-- User interview transcripts
+### Required Sources and Exclusions
+
+Juno has read-only access to approved sources:
+
+- Product strategy one-pager and roadmap
+- Designated organizational review Slack channels
+- Jira ticket comments and review activity
+- Asana feature requests, including descriptions, acceptance criteria, completion status, and release information
+- Approved user interview transcripts
 - Feedback surveys
-- Completed feature requests and their linked Asana tickets, including descriptions, acceptance criteria, release status, and related product changes
+- Historical sentiment snapshots since launch (May 2026)
 
-Juno analyzes feedback by reviewer type (Legal, Privacy, Security, Equity) and engineering organization (Trust, Customer Support, Guest & Host, Insurance, Relevance, Martech).
+Feedback is segmented by:
 
-Only approved sources are included. Data is refreshed weekly, and each finding must link to its original source.
+- **Reviewers:** Legal, Privacy, Security, Equity
+- **Engineers:** Trust, Customer Support, Guest & Host, Insurance, Relevance, Martech
 
-Excluded: private Slack messages, unrelated channels/projects, unapproved research, and personal information unnecessary for sentiment analysis. All findings must link to their original sources.
+**Excluded:**
+- Private Slack messages
+- Unrelated channels or projects
+- Unapproved research
+- Personal information unnecessary for sentiment analysis
+
+All findings must link to their original sources.
 
 **How fresh must it be**
 
-Refresh every Thursday at 2 PM Pacific, analyzing new feedback since the previous successful run and updating trends dating back to May 2026.
-
-Source data must be successfully retrieved within the current weekly run. Record the last successful refresh time for each source.
-
-If a source is unavailable, flag it as missing, preserve the previous week's verified data, and do not present incomplete findings as a complete weekly report. Notify me of the failure.
+- Refresh every Thursday at 2 PM Pacific.
+- Analyze all new feedback since the previous successful run.
+- Maintain historical trends dating back to May 2026.
+- Record the last successful refresh timestamp for each source.
+- If a required source is unavailable, stop the run, preserve the last verified dashboard, and notify me.
+- Do not present incomplete findings as a complete weekly report.
 
 ## 02 Tools · System Capabilities
 
 **The verb list**
 
-READ (auto): Retrieve approved Slack messages, Jira records, interview transcripts, surveys, strategy documents, and historical sentiment data.
+- **READ (auto):** Retrieve approved Slack messages, Jira records, Asana feature requests, interview transcripts, surveys, strategy documents, and historical sentiment data.
 
-ANALYZE (auto): Classify feedback by persona, priority, sentiment, and theme; identify trends and compare against completed feature requests.
+- **ANALYZE (auto):** Classify feedback by persona, priority, sentiment, and theme; identify trends and compare against completed feature requests.
 
-WRITE (auto, limited): Update Juno's internal sentiment dataset and dashboard; save weekly analysis snapshots.
+- **WRITE (confirm):** Update Juno's internal sentiment dataset and dashboard; save weekly analysis snapshots only after my approval.
 
-DRAFT (auto): Prepare a Slack summary of 300 words or fewer with trends across all three priorities, two representative quotes, and links to supporting evidence.
+- **DRAFT (auto):** Prepare a Slack summary of 300 words or fewer with trends across all three priorities, two representative quotes, and links to supporting evidence.
 
-SEND (confirm): Publish the summary only to the designated team Slack channel after my explicit approval.
+- **SEND (confirm):** Publish the summary only to the designated team Slack channel after my explicit approval.
 
-ALERT (auto, limited): Send a predefined failure notification to me when a scheduled run cannot complete.
+- **ALERT (auto, limited):** Send a predefined failure notification to me when a scheduled run cannot complete.
 
-Juno cannot modify source records, create or update Jira tickets, message other individuals, or publish unapproved summaries.
+**Restrictions:**
+- Juno cannot modify source records.
+- Juno cannot create or update Jira or Asana tickets.
+- Juno cannot message other individuals or publish unapproved summaries.
 
 **Deliberate omissions**
 
-Juno cannot create feature requests, reprioritize the roadmap, or independently recommend that a feature be built without checking existing completed work.
+Juno cannot:
 
-These actions are excluded because sentiment is an input to product decisions, not sufficient evidence for making them autonomously.
+- Create or modify Jira or Asana tickets
+- Change product roadmap priorities
+- Modify original feedback or research records
+- Access unapproved sources
+- Publish dashboard updates or Slack summaries without approval
+- Recommend new product work without first checking existing completed and released features
 
-Juno also cannot access private Slack messages or post directly to the team channel without approval, limiting privacy risks and preventing unsupported conclusions from being shared.
+These boundaries ensure that Juno informs product decisions without making them autonomously.
 
 ## 03 Loop · AI Costs & Latency
 
 **Turn ceiling and escalation**
 
-One scheduled run every Thursday at 2 PM Pacific.
+- **Schedule:** One run every Thursday at 2 PM Pacific.
 
-Maximum five processing stages per run:
+- **Maximum processing stages:** Five per run:
+  1. Retrieve approved source data.
+  2. Classify and group sentiment.
+  3. Compare trends and cross-reference completed features.
+  4. Verify evidence and prepare dashboard updates.
+  5. Draft the weekly Slack summary for approval.
 
-Retrieve approved source data
+- **Retries:** One attempt per stage, except one additional verification attempt for an untraceable quote.
 
-Classify and group sentiment
+- **Immediate stop conditions:**
+  - Required source retrieval fails.
+  - A survey response cannot be classified.
+  - A critical verification check fails.
+  - The run exceeds 15 minutes or the configured cost ceiling.
 
-Compare trends and cross-reference completed features
+- **Escalation:** Notify me through Slack with the specific failure and required investigation.
 
-Verify evidence and update the dashboard
+- **Fallback:** Preserve completed intermediate work and the last verified dashboard. Do not publish partial results.
 
-Draft the weekly Slack summary for approval
-
-Each stage gets one attempt, with no automatic retries.
-
-If a required source is unavailable, verification fails, or a stage exceeds its time limit, Juno stops, preserves the last verified dashboard, and sends me a Slack alert describing the issue. A human must authorize a rerun.
+- **Human intervention:** A failed run requires my approval before restarting.
 
 **Latency and cost target**
 
-Target: Complete the weekly analysis, dashboard refresh, and Slack draft within 10 minutes.
+- **Target processing time:** 10 minutes per weekly run.
+- **Hard timeout:** 15 minutes.
+- **Initial cost ceiling:** $2 in model/API processing costs per weekly run, subject to validation during testing.
+- Analyze all new feedback rather than sampling, since weekly volume is expected to be in the dozens.
+- Reuse previously verified historical sentiment snapshots rather than reprocessing the entire history every week.
+- Prioritize deeper reasoning for interview transcripts, cross-source synthesis, and feature-to-feedback matching.
+- Use simpler classification for straightforward metadata and categorization tasks.
 
-Hard ceiling: 15 minutes or $2 in model/API processing costs per weekly run, whichever comes first. These are initial prototype targets to validate through testing.
-
-Process only new or changed records each week rather than reanalyzing the entire history. Reuse previously verified sentiment snapshots for historical trends.
-
-If the run exceeds either limit, stop, preserve the last successful output, and notify me. Do not publish a partial summary.
+Accuracy takes priority over speed. Users are not waiting in real time for the report.
 
 ## 04 Memory · Data Requirements
 
 **What persists, at what scope**
 
-Juno retains product-level historical sentiment snapshots from launch (May 2026), including weekly themes, sentiment trends by persona and priority, source references, and links to relevant completed feature requests.
+Juno retains product-level historical sentiment snapshots dating back to launch (May 2026), including:
 
-Memory is shared only within the authorized product team, not across unrelated users or projects.
+- Weekly sentiment themes
+- Sentiment trends by persona and product priority
+- Supporting evidence and source references
+- Links to relevant completed feature requests
+- Historical weekly reports
+- Human corrections to classifications and feature matches
 
-Raw source content remains in its original system; Juno stores references and derived analysis rather than duplicating entire Slack conversations or interview transcripts.
+Memory is shared only within the authorized product team.
+
+Raw source content remains in its original system. Juno stores references and derived analysis rather than duplicating entire Slack conversations or interview transcripts.
 
 Individual user profiles and unrelated personal information are not retained.
 
 **Expiry and write rules**
 
-Retain weekly sentiment snapshots for 12 months, subject to company retention policies. Temporary processing data expires after 30 days. Source links remain subject to the original system's access and retention rules.
-
-Juno may write new weekly snapshots but must preserve prior versions for auditability.
-
-If I correct a sentiment classification, persona attribution, or feature-to-feedback connection, my correction overrides Juno's analysis. Juno records the correction, updates the affected dashboard finding, and uses the corrected record in future trend calculations.
-
-Juno must never overwrite a human correction without requesting approval.
+- Retain weekly sentiment snapshots for 12 months, subject to company retention policies.
+- Temporary processing data expires after 30 days.
+- Source links remain subject to their original system's access and retention rules.
+- Preserve prior versions of weekly snapshots for auditability.
+- Human corrections override Juno's classifications and conclusions.
+- Record corrections and use them in future trend calculations.
+- Never overwrite a human correction without approval.
+- Publishing new or revised historical snapshots requires my confirmation.
 
 ## 05 Permissions · AI Risks & Mitigations
 
@@ -138,57 +171,60 @@ Juno must never overwrite a human correction without requesting approval.
 
 **Justification**
 
-READ — Auto: Limited to approved, read-only sources. No changes to original data.
-
-DRAFT — Auto: Generates internal analysis and summaries without publishing them.
-
-WRITE — Confirm: Updating Juno's internal dashboard and historical sentiment snapshots requires my explicit approval. Juno cannot modify Jira, Slack source messages, roadmap records, or interview transcripts. This ensures I can review the accuracy of sentiment trends and insights before they become visible to the team.
-
-SEND — Confirm: Publishing to the team Slack channel requires my explicit approval because inaccurate sentiment summaries could misdirect product priorities or damage stakeholder trust.
-
-Failure alerts are separately authorized, template-based messages sent only to me, not the broader team.
+- **READ — Auto:** Limited to approved, read-only sources. No changes to original data.
+- **DRAFT — Auto:** Generates internal analysis and summaries without publishing them.
+- **WRITE — Confirm:** Updating Juno's internal dashboard and historical sentiment snapshots requires my explicit approval. Juno cannot modify Jira, Slack source messages, roadmap records, or interview transcripts. This ensures I can review sentiment trends and insights before they become visible to the team.
+- **SEND — Confirm:** Publishing to the team Slack channel requires my explicit approval because inaccurate sentiment summaries could misdirect product priorities or damage stakeholder trust.
+- **Failure alerts — Auto:** Juno may send predefined failure notifications only to me, not the broader team.
 
 ## 06 Verification · AI Testing & Measurement
 
 **The check before output ships**
 
-Before updating the dashboard or presenting the Slack draft, Juno verifies:
+Before presenting results, Juno verifies:
 
-100% of published insights and quotes have accessible source references.
+- **Source traceability:** 100% of published insights and quotes link to their original sources.
 
-Quotes match the original wording and correct persona attribution.
+- **Quote accuracy:** Quotes match the original wording and correct persona attribution.
 
-All three product priorities are represented, including when evidence is insufficient.
+- **Priority coverage:** All three product priorities are represented, including when evidence is insufficient:
+  - Faster reviews
+  - Faster submissions
+  - Earlier feedback on risk
 
-Weekly trends use consistent periods and sentiment classification rules.
+- **Trend consistency:** Weekly trends use consistent reporting periods and sentiment classification rules.
 
-Trend claims are based on at least five distinct feedback signals from at least three users; otherwise label them "Limited evidence."
+- **Evidence threshold:** Widespread trend claims require at least five distinct feedback signals from at least three users. Otherwise, label them "Limited evidence."
 
-Duplicate messages and repeated comments from the same user do not artificially inflate sentiment.
+- **Critical blockers:** A verified blocker to a core submission or review workflow is surfaced even if only one user reports it, without implying widespread impact.
 
-Actionable negative themes are cross-referenced against completed feature requests before suggesting new product work.
+- **Deduplication:** Duplicate messages and repeated comments from the same user do not artificially inflate sentiment.
 
-Existing features are described as potential solutions, not proven fixes, unless outcome evidence supports that conclusion.
+- **Current-state validation:** Actionable negative themes are cross-referenced against completed and released features before suggesting new product work.
 
-The Slack draft must meet the 300-word limit, include two sourced quotes, and link to the dashboard.
+- **Solution matching:** Existing features are described as potential solutions, not proven fixes, unless outcome evidence supports that conclusion.
 
-I provide final human approval before publication.
+- **Sentiment ambiguity:** Uncertain positive, neutral, or negative classifications are flagged for human review.
+
+- **Slack summary requirements:**
+  - 300 words or fewer.
+  - Two representative, sourced quotes.
+  - Link to the dashboard.
+  - Headline sentiment trend for each of the three product priorities.
+  - Key areas requiring product team attention.
+
+- **Human approval:** I review and approve dashboard updates and the weekly Slack summary before publication.
 
 **Failure behaviour**
 
 If verification fails:
 
-Exclude unsupported claims or quotes rather than inventing evidence.
-
-Label low-confidence findings as "Insufficient evidence."
-
-If a completed feature may address a sentiment theme but the connection is uncertain, present it as a hypothesis requiring PM validation.
-
-If a required source is missing or a critical validation fails, block the weekly publication and retain the last verified dashboard.
-
-Send me a failure notification identifying the affected source, check, or finding, along with the next action required.
-
-Juno never silently drops failed checks or publishes an incomplete report as though it were complete.
+- Exclude unsupported claims or quotes rather than inventing evidence.
+- Label low-confidence findings as "Insufficient evidence."
+- If a completed feature may address a sentiment theme but the connection is uncertain, present it as a hypothesis requiring PM validation.
+- If a required source is missing or a critical validation fails, block the weekly publication and retain the last verified dashboard.
+- Send me a failure notification identifying the affected source, check, or finding, along with the next action required.
+- Juno never silently drops failed checks or publishes an incomplete report as though it were complete.
 
 ## Eval plan
 
@@ -197,3 +233,4 @@ _Stub. Module 6 fills this in: golden set, pass thresholds, and regression caden
 ## Out of scope
 
 Any capability not in the verb list above, and any action tiered `blocked`. Both are decisions on the record, not omissions.
+
