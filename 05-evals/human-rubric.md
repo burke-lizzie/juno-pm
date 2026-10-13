@@ -25,10 +25,10 @@ Distinguish genuine sentiment from factual observations, flag ambiguous feedback
 - Include 5 randomly selected classifications and 5 flagged as ambiguous, negative, or low-confidence.
 - For the first 4 weeks, review all classifications to establish a baseline.
 - Add recurring errors to the golden evaluation dataset.
-**Who scores them with you:**
+- **Who scores them with you:**
 - Primary reviewer: Me (Product Manager).
 - Secondary reviewer: Another product team member independently scores 5 classifications per month, prioritizing ambiguous or disputed examples.
-**What happens when two of you disagree:**
+- **What happens when two of you disagree:**
 - Compare scores against the original feedback and rubric.
 - If scores differ by 2 or more points, discuss the reasoning and agree on a final score.
 - For disagreements about sentiment labels, review the original context regardless of score difference.
