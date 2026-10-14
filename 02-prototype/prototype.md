@@ -4,8 +4,8 @@
 
 ## Prototype link
 
-[User sentiment dashboard](https://lovable.dev/preview/VlTGs8umES7rZRBcJTu9m0KlANk63ZCH)
-[Product insight x user sentiment dashboard](https://lovable.dev/preview/eUsN4XjLeu4EJcrAUOS3YZvxnVTZasfG) 
+- [User sentiment dashboard](https://lovable.dev/preview/VlTGs8umES7rZRBcJTu9m0KlANk63ZCH)
+- [Product insight x user sentiment dashboard](https://lovable.dev/preview/eUsN4XjLeu4EJcrAUOS3YZvxnVTZasfG) 
 _____
 
 ## What it demonstrates
